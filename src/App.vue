@@ -25,7 +25,81 @@ import copyIcon from "./assets/Shape.svg";
           <img :src="copyIcon" alt="copy icon" class="w-4 md:w-full" />
         </div>
       </div>
-      <div class=""></div>
+      <div class="bg-darkGrey p-4">
+        <div class="relative">
+          <label class="text-base text-almostWhite text-bold" for="range"
+            >Character Length</label
+          >
+          <span class="absolute right-[0px] text-2xl text-neonGreen">10</span>
+          <input
+            class="mt-[13px] w-full appearance-none h-2 bg-neonGreen"
+            type="range"
+          />
+        </div>
+
+        <div class="mt-8">
+          <div class="flex flex-col gap-4">
+            <div class="flex gap-5 items-center">
+              <input
+                class="w-5 h-5 bg-neonGreen appearance-none"
+                type="checkbox"
+              />
+              <h2 class="text-base text-almostWhite text-bold">
+                Include Uppercase Letters
+              </h2>
+            </div>
+            <div class="flex items-center gap-5">
+              <input
+                class="w-5 h-5 bg-neonGreen appearance-none"
+                type="checkbox"
+              />
+              <h2 class="text-base text-almostWhite text-bold">
+                Include Lowercase Letters
+              </h2>
+            </div>
+            <div class="flex gap-5 items-center">
+              <input
+                class="w-5 h-5 bg-neonGreen appearance-none"
+                type="checkbox"
+              />
+              <h2 class="text-base text-almostWhite text-bold">
+                Include Numbers
+              </h2>
+            </div>
+            <div class="flex gap-5 items-center">
+              <input
+                class="w-5 h-5 bg-neonGreen appearance-none"
+                type="checkbox"
+              />
+              <h2 class="text-base text-almostWhite text-bold">
+                Include Symbols
+              </h2>
+            </div>
+          </div>
+
+          <div
+            class="flex justify-between items-center w-full mt-8 px-4 py-[17px] bg-veryDarkGrey"
+          >
+            <h3 class="text-base text-grey text-bold">STRENGTH</h3>
+            <div class="flex gap-4">
+              <span class="text-[18px] text-bold text-almostWhite">MEDIUM</span>
+              <div class="flex gap-2">
+                <div class="w-[10px] h-[28px] border-almostWhite border"></div>
+                <div class="w-[10px] h-[28px] border-almostWhite border"></div>
+                <div class="w-[10px] h-[28px] border-almostWhite border"></div>
+                <div class="w-[10px] h-[28px] border-almostWhite border"></div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex justify-center items-center bg-neonGreen px-x py-[17px] mt-4"
+          >
+            <h3 class="text-base text-darkGrey text-bold">GENERATE</h3>
+            <img class="w-3 h-3" src="" alt="arrow icon" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
