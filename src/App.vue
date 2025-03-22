@@ -1,5 +1,9 @@
 <script setup>
 import copyIcon from "./assets/Shape.svg";
+import ArrowIcon from "./assets/arrow.svg";
+import { ref } from "vue";
+
+const defaultRange = ref(20);
 </script>
 
 <template>
@@ -30,10 +34,13 @@ import copyIcon from "./assets/Shape.svg";
           <label class="text-base text-almostWhite text-bold" for="range"
             >Character Length</label
           >
-          <span class="absolute right-[0px] text-2xl text-neonGreen">10</span>
+          <span class="absolute right-[0px] text-2xl text-neonGreen">{{
+            defaultRange
+          }}</span>
           <input
             class="mt-[13px] w-full appearance-none h-2 bg-neonGreen"
             type="range"
+            :value="defaultRange"
           />
         </div>
 
@@ -93,10 +100,10 @@ import copyIcon from "./assets/Shape.svg";
           </div>
 
           <div
-            class="flex justify-center items-center bg-neonGreen px-x py-[17px] mt-4"
+            class="flex justify-center items-center bg-neonGreen gap-4 py-[17px] mt-4"
           >
-            <h3 class="text-base text-darkGrey text-bold">GENERATE</h3>
-            <img class="w-3 h-3" src="" alt="arrow icon" />
+            <h3 class="text-base text-darkGrey font-bold">GENERATE</h3>
+            <img class="w-3 h-3" :src="ArrowIcon" alt="arrow icon" />
           </div>
         </div>
       </div>

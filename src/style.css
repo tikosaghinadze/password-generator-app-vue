@@ -7,3 +7,30 @@
 body {
   font-family: "JetBrains Mono", monospace;
 }
+
+.range-slider::-webkit-slider-runnable-track {
+  @apply bg-blue-500 h-1 rounded-lg;
+}
+
+.range-slider::-moz-range-track {
+  @apply bg-blue-500 h-1 rounded-lg;
+}
+
+/* Thumb (Slider Handle) */
+.range-slider::-webkit-slider-thumb {
+  @apply w-5 h-5 bg-white border-2 border-blue-500 rounded-full cursor-pointer appearance-none;
+  margin-top: -6px; /* Adjust thumb position */
+}
+
+.range-slider::-moz-range-thumb {
+  @apply w-5 h-5 bg-white border-2 border-blue-500 rounded-full cursor-pointer;
+}
+
+/* Focus state */
+.range-slider:focus::-webkit-slider-thumb {
+  @apply ring-2 ring-blue-300;
+}
+
+.range-slider:focus::-moz-range-thumb {
+  @apply ring-2 ring-blue-300;
+}
