@@ -3,7 +3,34 @@ import copyIcon from "./assets/Shape.svg";
 import ArrowIcon from "./assets/arrow.svg";
 import { ref } from "vue";
 
-const defaultRange = ref(20);
+const passwordLength = ref(20);
+const defaultRange = ref(10);
+const includeUpperCase = ref(true);
+const includeLowerCase = ref(true);
+const includeNumbers = ref(true);
+const includeSymbols = ref(true);
+const generatedPassword = "";
+
+const generatePassword = () => {
+  const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const upperCaseChars = includeUpperCase.value
+    ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    : "";
+  const numbersChars = includeNumbers.value ? "0123456789" : "";
+  const symbolsChars = includeSymbols.value
+    ? "!@#$%^&*()_+[]{}|;:,.<>?/~`"
+    : "";
+  const allChars =
+    lowercaseChars + upperCaseChars + numbersChars + symbolsChars;
+
+  let password = "";
+  for (let i = 0; i < passwordLength.value; i++) {
+    const randomIndex = Math.floor(Math.random() * allChars.length);
+    password += allChars[randomIndex];
+  }
+
+  generatePassword.value = password;
+};
 </script>
 
 <template>
@@ -38,7 +65,7 @@ const defaultRange = ref(20);
             defaultRange
           }}</span>
           <input
-            class="mt-[13px] w-full appearance-none h-2 bg-neonGreen"
+            class="mt-[18px] w-full appearance-none h-2 bg-neonGreen"
             type="range"
             :value="defaultRange"
           />
