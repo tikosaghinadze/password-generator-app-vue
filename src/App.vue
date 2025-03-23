@@ -3,13 +3,12 @@ import copyIcon from "./assets/Shape.svg";
 import ArrowIcon from "./assets/arrow.svg";
 import { ref } from "vue";
 
-const passwordLength = ref(20);
-const defaultRange = ref(10);
+const passwordLength = ref("10");
 const includeUpperCase = ref(true);
 const includeLowerCase = ref(true);
 const includeNumbers = ref(true);
 const includeSymbols = ref(true);
-const generatedPassword = "";
+const generatedPassword = ref("");
 
 const generatePassword = () => {
   const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
@@ -29,7 +28,7 @@ const generatePassword = () => {
     password += allChars[randomIndex];
   }
 
-  generatePassword.value = password;
+  generatedPassword.value = password;
 };
 </script>
 
@@ -43,9 +42,9 @@ const generatePassword = () => {
         class="relative flex justify-between items-center bg-darkGrey py-[22px] px-4"
       >
         <input
-          class="placeholder:text-grey bg-darkGrey text-almostWhite text-[20px] md:text-2xl outline-none"
+          class="generated-password bg-darkGrey placeholder:text-grey text-almostWhite text-[20px] md:text-2xl outline-none"
           type="text"
-          value=""
+          :value="generatedPassword"
           readonly
           placeholder="P4$5W0rD!"
         />
@@ -62,12 +61,14 @@ const generatePassword = () => {
             >Character Length</label
           >
           <span class="absolute right-[0px] text-2xl text-neonGreen">{{
-            defaultRange
+            passwordLength
           }}</span>
           <input
             class="mt-[18px] w-full appearance-none h-2 bg-neonGreen"
             type="range"
-            :value="defaultRange"
+            v-model="passwordLength"
+            min="1"
+            max="20"
           />
         </div>
 
@@ -75,6 +76,7 @@ const generatePassword = () => {
           <div class="flex flex-col gap-4">
             <div class="flex gap-5 items-center">
               <input
+                v-model="includeUpperCase"
                 class="w-5 h-5 bg-neonGreen appearance-none"
                 type="checkbox"
               />
@@ -84,6 +86,7 @@ const generatePassword = () => {
             </div>
             <div class="flex items-center gap-5">
               <input
+                v-model="includeLowerCase"
                 class="w-5 h-5 bg-neonGreen appearance-none"
                 type="checkbox"
               />
@@ -93,6 +96,7 @@ const generatePassword = () => {
             </div>
             <div class="flex gap-5 items-center">
               <input
+                v-model="includeNumbers"
                 class="w-5 h-5 bg-neonGreen appearance-none"
                 type="checkbox"
               />
@@ -102,6 +106,7 @@ const generatePassword = () => {
             </div>
             <div class="flex gap-5 items-center">
               <input
+                v-model="includeSymbols"
                 class="w-5 h-5 bg-neonGreen appearance-none"
                 type="checkbox"
               />
@@ -126,12 +131,13 @@ const generatePassword = () => {
             </div>
           </div>
 
-          <div
-            class="flex justify-center items-center bg-neonGreen gap-4 py-[17px] mt-4"
+          <button
+            @click="generatePassword"
+            class="w-full flex justify-center items-center bg-neonGreen gap-4 py-[17px] mt-4"
           >
             <h3 class="text-base text-darkGrey font-bold">GENERATE</h3>
             <img class="w-3 h-3" :src="ArrowIcon" alt="arrow icon" />
-          </div>
+          </button>
         </div>
       </div>
     </div>
