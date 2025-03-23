@@ -1,7 +1,7 @@
 <script setup>
 import copyIcon from "./assets/Shape.svg";
 import ArrowIcon from "./assets/arrow.svg";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const passwordLength = ref("10");
 const includeUpperCase = ref(false);
@@ -30,6 +30,29 @@ const generatePassword = () => {
 
   generatedPassword.value = password;
 };
+
+const passwordStrength = computed(() => {
+  let strength = 0;
+  if (includeUpperCase.value) strength++;
+  if (includeLowerCase.value) strength++;
+  if (includeNumbers.value) strength++;
+  if (includeSymbols.value) strength++;
+  if (passwordLength.value >= 12) strength++;
+
+  switch (strength) {
+    case 1:
+      return "TOO WEAK!";
+    case 2:
+      return "WEAK";
+    case 3:
+      return "MEDIUM";
+    case 4:
+    case 5:
+      return "STRONG";
+    default:
+      return "TOO WEAK!";
+  }
+});
 </script>
 
 <template>
@@ -121,12 +144,40 @@ const generatePassword = () => {
           >
             <h3 class="text-base text-grey text-bold">STRENGTH</h3>
             <div class="flex gap-4">
-              <span class="text-[18px] text-bold text-almostWhite">MEDIUM</span>
+              <span class="text-[18px] text-bold text-almostWhite">{{
+                passwordStrength
+              }}</span>
               <div class="flex gap-2">
-                <div class="w-[10px] h-[28px] border-almostWhite border"></div>
-                <div class="w-[10px] h-[28px] border-almostWhite border"></div>
-                <div class="w-[10px] h-[28px] border-almostWhite border"></div>
-                <div class="w-[10px] h-[28px] border-almostWhite border"></div>
+                <div
+                  :class="{
+                    'bg-red': passwordStrength === 'TOO WEAK!',
+                    'bg-orange': passwordStrength === 'WEAK',
+                    'bg-yellow': passwordStrength === 'MEDIUM',
+                    'bg-neonGreen': passwordStrength === 'STRONG',
+                  }"
+                  class="w-[10px] h-[28px] border-almostWhite border"
+                ></div>
+                <div
+                  :class="{
+                    'bg-orange': passwordStrength === 'WEAK',
+                    'bg-yellow': passwordStrength === 'MEDIUM',
+                    'bg-neonGreen': passwordStrength === 'STRONG',
+                  }"
+                  class="w-[10px] h-[28px] border-almostWhite border"
+                ></div>
+                <div
+                  :class="{
+                    'bg-yellow': passwordStrength === 'MEDIUM',
+                    'bg-neonGreen': passwordStrength === 'STRONG',
+                  }"
+                  class="w-[10px] h-[28px] border-almostWhite border"
+                ></div>
+                <div
+                  :class="{
+                    'bg-neonGreen': passwordStrength === 'STRONG',
+                  }"
+                  class="w-[10px] h-[28px] border-almostWhite border"
+                ></div>
               </div>
             </div>
           </div>
