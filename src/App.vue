@@ -4,10 +4,10 @@ import ArrowIcon from "./assets/arrow.svg";
 import { ref } from "vue";
 
 const passwordLength = ref("10");
-const includeUpperCase = ref(true);
-const includeLowerCase = ref(true);
-const includeNumbers = ref(true);
-const includeSymbols = ref(true);
+const includeUpperCase = ref(false);
+const includeLowerCase = ref(false);
+const includeNumbers = ref(false);
+const includeSymbols = ref(false);
 const generatedPassword = ref("");
 
 const generatePassword = () => {
@@ -77,7 +77,7 @@ const generatePassword = () => {
             <div class="flex gap-5 items-center">
               <input
                 v-model="includeUpperCase"
-                class="w-5 h-5 bg-neonGreen appearance-none"
+                class="w-5 h-5 bg-veryDarkGrey custom-checkbox border-almostWhite border-2 appearance-none"
                 type="checkbox"
               />
               <h2 class="text-base text-almostWhite text-bold">
@@ -87,7 +87,7 @@ const generatePassword = () => {
             <div class="flex items-center gap-5">
               <input
                 v-model="includeLowerCase"
-                class="w-5 h-5 bg-neonGreen appearance-none"
+                class="w-5 h-5 bg-veryDarkGrey custom-checkbox border-almostWhite border-2 appearance-none"
                 type="checkbox"
               />
               <h2 class="text-base text-almostWhite text-bold">
@@ -97,7 +97,7 @@ const generatePassword = () => {
             <div class="flex gap-5 items-center">
               <input
                 v-model="includeNumbers"
-                class="w-5 h-5 bg-neonGreen appearance-none"
+                class="w-5 h-5 bg-veryDarkGrey custom-checkbox border-almostWhite border-2 appearance-none"
                 type="checkbox"
               />
               <h2 class="text-base text-almostWhite text-bold">
@@ -107,7 +107,7 @@ const generatePassword = () => {
             <div class="flex gap-5 items-center">
               <input
                 v-model="includeSymbols"
-                class="w-5 h-5 bg-neonGreen appearance-none"
+                class="w-5 h-5 bg-veryDarkGrey custom-checkbox border-almostWhite border-2 appearance-none"
                 type="checkbox"
               />
               <h2 class="text-base text-almostWhite text-bold">
@@ -143,3 +143,17 @@ const generatePassword = () => {
     </div>
   </div>
 </template>
+<style>
+.custom-checkbox:checked {
+  background-color: #a4ffaf;
+  border: none;
+}
+
+.custom-checkbox:checked::before {
+  content: "✔";
+  display: block;
+  color: #1a1a1a; /* veryDarkGrey */
+  text-align: center;
+  line-height: 1.2; /* veryDarkGrey */
+}
+</style>
