@@ -9,6 +9,7 @@ const includeLowerCase = ref(false);
 const includeNumbers = ref(false);
 const includeSymbols = ref(false);
 const generatedPassword = ref("");
+const generatedPasswordLength = ref(passwordLength.value);
 
 const generatePassword = () => {
   const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
@@ -29,6 +30,7 @@ const generatePassword = () => {
   }
 
   generatedPassword.value = password;
+  generatedPasswordLength.value = passwordLength.value;
 };
 
 const passwordStrength = computed(() => {
@@ -50,8 +52,18 @@ const passwordStrength = computed(() => {
     case 5:
       return "STRONG";
     default:
-      return "TOO WEAK!";
+      return " ";
   }
+});
+
+const fontSize = computed(() => {
+  if (
+    generatedPasswordLength.value >= 15 &&
+    generatedPasswordLength.value <= 20
+  ) {
+    return "16px";
+  }
+  return "20px";
 });
 </script>
 
@@ -65,7 +77,8 @@ const passwordStrength = computed(() => {
         class="relative flex justify-between items-center bg-darkGrey py-[22px] px-4"
       >
         <input
-          class="generated-password bg-darkGrey placeholder:text-grey text-almostWhite text-[20px] md:text-2xl outline-none"
+          class="generated-password text-[20px] bg-darkGrey placeholder:text-grey text-almostWhite md:text-2xl outline-none"
+          :style="{ fontSize: fontSize }"
           type="text"
           :value="generatedPassword"
           readonly
