@@ -10,6 +10,7 @@ const includeNumbers = ref(false);
 const includeSymbols = ref(false);
 const generatedPassword = ref("");
 const generatedPasswordLength = ref(passwordLength.value);
+const isCopied = ref(false);
 
 const generatePassword = () => {
   const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
@@ -31,6 +32,13 @@ const generatePassword = () => {
 
   generatedPassword.value = password;
   generatedPasswordLength.value = passwordLength.value;
+  isCopied.value = false;
+};
+
+const copyToClipboard = () => {
+  navigator.clipboard.writeText(generatedPassword.value).then(() => {
+    isCopied.value = true;
+  });
 };
 
 const passwordStrength = computed(() => {
@@ -85,10 +93,15 @@ const fontSize = computed(() => {
           placeholder="P4$5W0rD!"
         />
         <div
-          class="absolute right-[22px] flex justify-between items-center gap-4 text-[18px] text-neonGreen uppercase"
+          @click="copyToClipboard"
+          class="absolute right-[22px] cursor-pointer flex justify-between items-center gap-4 text-[18px] text-neonGreen uppercase"
         >
-          <span class="text-[14px] md:text-base">copied</span>
-          <img :src="copyIcon" alt="copy icon" class="w-4 md:w-full" />
+          <span v-if="isCopied" class="text-[14px] md:text-base">copied</span>
+          <img
+            :src="copyIcon"
+            alt="copy icon"
+            class="w-4 md:w-full hover:scale-105"
+          />
         </div>
       </div>
       <div class="bg-darkGrey p-4">
